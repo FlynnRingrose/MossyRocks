@@ -19,7 +19,7 @@ void EmptyLinkFunctionForGeneratedCodeMossyRocks01_init() {}
 			static const UE4CodeGen_Private::FPackageParams PackageParams = {
 				"/Script/MossyRocks01",
 				PKG_CompiledIn | 0x00000000,
-				0x94C2EB26,
+				0x3AA333E2,
 				0x67FDBBA1,
 				nullptr, 0,
 				METADATA_PARAMS(nullptr, 0)

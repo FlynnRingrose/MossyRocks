@@ -24,23 +24,21 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadOnly)
     UStaticMeshComponent * Rock;
     
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Floats")
-    float MovementSpeed = 6000.f;
-
-
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 private:
     //float DeltaSeconds = 0.f;
-    float CurrentSpeed = 0.f;
-    float RotationDirection = 0.f;
+    //float CurrentSpeed = 0.f;
+    //float RotationDirection = 0.f;
     
     FVector MovementInput;
+    FVector RockInput;
+    
     
     void SpinRock(float AxisValue);
     void EnableMovement();
-    float GetRotationDirection(float Speed, float Direction);
+    //float GetRotationDirection(float Speed, float Direction);
 
 };

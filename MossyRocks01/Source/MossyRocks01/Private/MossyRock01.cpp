@@ -25,7 +25,6 @@ void AMossyRock01::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
     EnableMovement();
-
 }
 
 // Called to bind functionality to input
@@ -37,22 +36,30 @@ void AMossyRock01::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 
 void AMossyRock01::EnableMovement()
 {
-    RotationDirection = GetRotationDirection(RotationDirection, MovementInput.Y);
-    
-    SetActorRotation(FMath::RInterpTo(GetActorRotation(), FRotator(0, RotationDirection, 0), (GetWorld()->GetDeltaSeconds()), 160));
-}
-
-float AMossyRock01::GetRotationDirection(float Speed, float Direction)
-{
-    float NewDirection = (GetWorld()->GetDeltaSeconds()) * (Direction * MovementSpeed);
-    float InterpolatedDirection = FMath::FInterpTo(Speed, NewDirection, (GetWorld()->GetDeltaSeconds()), 4.0);
-    
-    CurrentSpeed = InterpolatedDirection;
-    return InterpolatedDirection;
+    FRotator NewRotation = GetActorRotation();
+    NewRotation.Yaw += RockInput.X;
+    SetActorRotation(NewRotation);
 }
 
 void AMossyRock01::SpinRock(float AxisValue)
 {
-    MovementInput.Y = FMath::Clamp<float>(AxisValue, -1.0f, 1.0f);
+    RockInput.X = AxisValue;
+    //MovementInput.Y = FMath::Clamp<float>(AxisValue, -1.0f, 1.0f);
 }
+
+
+
+
+/*float AMossyRock01::GetRotationDirection(float Speed, float Direction)
+ {
+ float NewDirection = (GetWorld()->GetDeltaSeconds()) * (Direction * MovementSpeed);
+ float InterpolatedDirection = FMath::FInterpTo(Speed, NewDirection, (GetWorld()->GetDeltaSeconds()), 4.0);
+ 
+ CurrentSpeed = InterpolatedDirection;
+ return InterpolatedDirection;
+ }*/
+
+/*RotationDirection = GetRotationDirection(RotationDirection, MovementInput.Y);
+ 
+ SetActorRotation(FMath::RInterpTo(GetActorRotation(), FRotator(0, RotationDirection, 0), (GetWorld()->GetDeltaSeconds()), 160));*/
 
