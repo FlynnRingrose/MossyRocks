@@ -9,6 +9,8 @@ AMossyRock01::AMossyRock01()
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
     
+    OnClicked.AddDynamic(this, &AMossyRock01::OnSelected);
+    
     Rock = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("RockMesh"));
 
 }
@@ -25,15 +27,18 @@ void AMossyRock01::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
     EnableMovement();
+    GrowClicked();
 }
 
 // Called to bind functionality to input
 void AMossyRock01::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+    //Execute SpinRock() every frame and pass it current axis value (-1 to 1).
     InputComponent->BindAxis("Rotate", this, &AMossyRock01::SpinRock);
 }
 
+//Set actor's rotation every fram to its current rotation plus current value of RockInput.X.
 void AMossyRock01::EnableMovement()
 {
     FRotator NewRotation = GetActorRotation();
@@ -41,25 +46,37 @@ void AMossyRock01::EnableMovement()
     SetActorRotation(NewRotation);
 }
 
+//Executed every frame. AxisValue is -1 to 1.
 void AMossyRock01::SpinRock(float AxisValue)
 {
     RockInput.X = AxisValue;
-    //MovementInput.Y = FMath::Clamp<float>(AxisValue, -1.0f, 1.0f);
 }
 
+void AMossyRock01::OnSelected(AActor* ClickedActor, FKey ButtonPressed)
+{
+    UE_LOG(LogTemp, Warning, TEXT("Pawn selected"));
+}
 
+void AMossyRock01::GrowClicked()
+{
+    APlayerController* ThisRocksController = Cast<APlayerController>(GetController());
+    if (ThisRocksController != nullptr)
+    {
+        float LocationX;
+        float LocationY;
+        ThisRocksController->GetMousePosition(LocationX, LocationY);
+        FVector2D MousePosition(LocationX, LocationY);
+        FHitResult HitResult;
+        const bool bTraceComplex = false;
 
-
-/*float AMossyRock01::GetRotationDirection(float Speed, float Direction)
- {
- float NewDirection = (GetWorld()->GetDeltaSeconds()) * (Direction * MovementSpeed);
- float InterpolatedDirection = FMath::FInterpTo(Speed, NewDirection, (GetWorld()->GetDeltaSeconds()), 4.0);
- 
- CurrentSpeed = InterpolatedDirection;
- return InterpolatedDirection;
- }*/
-
-/*RotationDirection = GetRotationDirection(RotationDirection, MovementInput.Y);
- 
- SetActorRotation(FMath::RInterpTo(GetActorRotation(), FRotator(0, RotationDirection, 0), (GetWorld()->GetDeltaSeconds()), 160));*/
-
+        if (ThisRocksController->GetHitResultAtScreenPosition(MousePosition, ECC_Visibility, bTraceComplex, HitResult) == true)
+        {
+            APawn* ClickedPawn = Cast<APawn>(HitResult.GetActor());
+            if(ClickedPawn != nullptr)
+            {
+                UE_LOG(LogTemp, Warning, TEXT("We touched the rock."));
+            }
+        }
+        
+    }
+}

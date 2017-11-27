@@ -2,13 +2,9 @@
 
 #include "RockController.h"
 
-/* void ARockController::SetPawn(APawn * InPawn)
+ARockController::ARockController()
 {
-    Super::SetPawn(InPawn);
-    if (InPawn)
-    {
-            
-    }
-}*/
-
-
+    bShowMouseCursor = true;
+    bEnableClickEvents = true;
+    bEnableMouseOverEvents = true;
+}

@@ -13,11 +13,9 @@ UCLASS()
 class MOSSYROCKS01_API ARockController : public APlayerController
 {
 	GENERATED_BODY()
+
+public:
+    ARockController();
     
 private:
-    //void SetPawn(APawn * InPawn);
-	
-	
-	
-	
 };

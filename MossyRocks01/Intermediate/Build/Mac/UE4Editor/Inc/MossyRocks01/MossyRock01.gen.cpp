@@ -17,10 +17,44 @@ void EmptyLinkFunctionForGeneratedCodeMossyRock01() {}
 	MOSSYROCKS01_API UClass* Z_Construct_UClass_AMossyRock01();
 	ENGINE_API UClass* Z_Construct_UClass_APawn();
 	UPackage* Z_Construct_UPackage__Script_MossyRocks01();
+	MOSSYROCKS01_API UFunction* Z_Construct_UFunction_AMossyRock01_OnSelected();
+	INPUTCORE_API UScriptStruct* Z_Construct_UScriptStruct_FKey();
+	ENGINE_API UClass* Z_Construct_UClass_AActor_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_UStaticMeshComponent_NoRegister();
 // End Cross Module References
 	void AMossyRock01::StaticRegisterNativesAMossyRock01()
 	{
+		UClass* Class = AMossyRock01::StaticClass();
+		static const FNameNativePtrPair Funcs[] = {
+			{ "OnSelected", (Native)&AMossyRock01::execOnSelected },
+		};
+		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, ARRAY_COUNT(Funcs));
+	}
+	UFunction* Z_Construct_UFunction_AMossyRock01_OnSelected()
+	{
+		struct MossyRock01_eventOnSelected_Parms
+		{
+			AActor* ClickedActor;
+			FKey ButtonPressed;
+		};
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			static const UE4CodeGen_Private::FStructPropertyParams NewProp_ButtonPressed = { UE4CodeGen_Private::EPropertyClass::Struct, "ButtonPressed", RF_Public|RF_Transient|RF_MarkAsNative, 0x0010000000000080, 1, nullptr, STRUCT_OFFSET(MossyRock01_eventOnSelected_Parms, ButtonPressed), Z_Construct_UScriptStruct_FKey, METADATA_PARAMS(nullptr, 0) };
+			static const UE4CodeGen_Private::FObjectPropertyParams NewProp_ClickedActor = { UE4CodeGen_Private::EPropertyClass::Object, "ClickedActor", RF_Public|RF_Transient|RF_MarkAsNative, 0x0010000000000080, 1, nullptr, STRUCT_OFFSET(MossyRock01_eventOnSelected_Parms, ClickedActor), Z_Construct_UClass_AActor_NoRegister, METADATA_PARAMS(nullptr, 0) };
+			static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[] = {
+				(const UE4CodeGen_Private::FPropertyParamsBase*)&NewProp_ButtonPressed,
+				(const UE4CodeGen_Private::FPropertyParamsBase*)&NewProp_ClickedActor,
+			};
+#if WITH_METADATA
+			static const UE4CodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+				{ "ModuleRelativePath", "Public/MossyRock01.h" },
+			};
+#endif
+			static const UE4CodeGen_Private::FFunctionParams FuncParams = { (UObject*(*)())Z_Construct_UClass_AMossyRock01, "OnSelected", RF_Public|RF_Transient|RF_MarkAsNative, nullptr, (EFunctionFlags)0x00020401, sizeof(MossyRock01_eventOnSelected_Parms), PropPointers, ARRAY_COUNT(PropPointers), 0, 0, METADATA_PARAMS(Function_MetaDataParams, ARRAY_COUNT(Function_MetaDataParams)) };
+			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, FuncParams);
+		}
+		return ReturnFunction;
 	}
 	UClass* Z_Construct_UClass_AMossyRock01_NoRegister()
 	{
@@ -34,6 +68,9 @@ void EmptyLinkFunctionForGeneratedCodeMossyRock01() {}
 			static UObject* (*const DependentSingletons[])() = {
 				(UObject* (*)())Z_Construct_UClass_APawn,
 				(UObject* (*)())Z_Construct_UPackage__Script_MossyRocks01,
+			};
+			static const FClassFunctionLinkInfo FuncInfo[] = {
+				{ &Z_Construct_UFunction_AMossyRock01_OnSelected, "OnSelected" }, // 578103945
 			};
 #if WITH_METADATA
 			static const UE4CodeGen_Private::FMetaDataPairParam Class_MetaDataParams[] = {
@@ -60,7 +97,7 @@ void EmptyLinkFunctionForGeneratedCodeMossyRock01() {}
 				&AMossyRock01::StaticClass,
 				DependentSingletons, ARRAY_COUNT(DependentSingletons),
 				0x00900080u,
-				nullptr, 0,
+				FuncInfo, ARRAY_COUNT(FuncInfo),
 				PropPointers, ARRAY_COUNT(PropPointers),
 				nullptr,
 				&StaticCppClassTypeInfo,
@@ -71,7 +108,7 @@ void EmptyLinkFunctionForGeneratedCodeMossyRock01() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(AMossyRock01, 4130987415);
+	IMPLEMENT_CLASS(AMossyRock01, 1241099773);
 	static FCompiledInDefer Z_CompiledInDefer_UClass_AMossyRock01(Z_Construct_UClass_AMossyRock01, &AMossyRock01::StaticClass, TEXT("/Script/MossyRocks01"), TEXT("AMossyRock01"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(AMossyRock01);
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

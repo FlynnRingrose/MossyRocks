@@ -21,24 +21,21 @@ public:
     // Called to bind functionality to input
     virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
     
+    UFUNCTION()
+    void OnSelected(AActor* ClickedActor, FKey ButtonPressed);
+    
     UPROPERTY(EditAnywhere, BlueprintReadOnly)
-    UStaticMeshComponent * Rock;
+    UStaticMeshComponent* Rock;
     
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 private:
-    //float DeltaSeconds = 0.f;
-    //float CurrentSpeed = 0.f;
-    //float RotationDirection = 0.f;
-    
     FVector MovementInput;
     FVector RockInput;
-    
-    
+
     void SpinRock(float AxisValue);
     void EnableMovement();
-    //float GetRotationDirection(float Speed, float Direction);
-
+    void GrowClicked();
 };
