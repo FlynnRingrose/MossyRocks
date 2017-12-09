@@ -38,7 +38,7 @@ void AMossyRock01::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
     InputComponent->BindAxis("Rotate", this, &AMossyRock01::SpinRock);
 }
 
-//Set actor's rotation every fram to its current rotation plus current value of RockInput.X.
+//Set actor's rotation every frame to its current rotation plus current value of RockInput.X.
 void AMossyRock01::EnableMovement()
 {
     FRotator NewRotation = GetActorRotation();
@@ -71,11 +71,13 @@ void AMossyRock01::GrowClicked()
 
         if (ThisRocksController->GetHitResultAtScreenPosition(MousePosition, ECC_Visibility, bTraceComplex, HitResult) == true)
         {
-            APawn* ClickedPawn = Cast<APawn>(HitResult.GetActor());
-            if(ClickedPawn != nullptr)
+            UMossyStaticMesh01* TouchedMoss = Cast<UMossyStaticMesh01>(HitResult.GetComponent());
+            if(TouchedMoss != nullptr && TouchedMoss->bHiddenInGame == true)
             {
-                UE_LOG(LogTemp, Warning, TEXT("We touched the rock."));
+                UE_LOG(LogTemp, Warning, TEXT("We touched the moss clump."));
+                TouchedMoss->SetHiddenInGame(false);
             }
+            
         }
         
     }

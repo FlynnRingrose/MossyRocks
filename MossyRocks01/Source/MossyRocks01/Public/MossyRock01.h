@@ -4,7 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
+#include "MossyStaticMesh01.h"
 #include "MossyRock01.generated.h"
+
+class UMossyStaticMesh01;
 
 UCLASS()
 class MOSSYROCKS01_API AMossyRock01 : public APawn

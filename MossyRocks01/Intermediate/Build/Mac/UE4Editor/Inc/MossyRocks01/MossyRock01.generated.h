@@ -15,7 +15,7 @@ struct FKey;
 #endif
 #define MOSSYROCKS01_MossyRock01_generated_h
 
-#define MossyRocks01_Source_MossyRocks01_Public_MossyRock01_h_12_RPC_WRAPPERS \
+#define MossyRocks01_Source_MossyRocks01_Public_MossyRock01_h_15_RPC_WRAPPERS \
  \
 	DECLARE_FUNCTION(execOnSelected) \
 	{ \
@@ -28,7 +28,7 @@ struct FKey;
 	}
 
 
-#define MossyRocks01_Source_MossyRocks01_Public_MossyRock01_h_12_RPC_WRAPPERS_NO_PURE_DECLS \
+#define MossyRocks01_Source_MossyRocks01_Public_MossyRock01_h_15_RPC_WRAPPERS_NO_PURE_DECLS \
  \
 	DECLARE_FUNCTION(execOnSelected) \
 	{ \
@@ -41,7 +41,7 @@ struct FKey;
 	}
 
 
-#define MossyRocks01_Source_MossyRocks01_Public_MossyRock01_h_12_INCLASS_NO_PURE_DECLS \
+#define MossyRocks01_Source_MossyRocks01_Public_MossyRock01_h_15_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesAMossyRock01(); \
 	friend MOSSYROCKS01_API class UClass* Z_Construct_UClass_AMossyRock01(); \
@@ -51,7 +51,7 @@ public: \
 	enum {IsIntrinsic=COMPILED_IN_INTRINSIC};
 
 
-#define MossyRocks01_Source_MossyRocks01_Public_MossyRock01_h_12_INCLASS \
+#define MossyRocks01_Source_MossyRocks01_Public_MossyRock01_h_15_INCLASS \
 private: \
 	static void StaticRegisterNativesAMossyRock01(); \
 	friend MOSSYROCKS01_API class UClass* Z_Construct_UClass_AMossyRock01(); \
@@ -61,7 +61,7 @@ public: \
 	enum {IsIntrinsic=COMPILED_IN_INTRINSIC};
 
 
-#define MossyRocks01_Source_MossyRocks01_Public_MossyRock01_h_12_STANDARD_CONSTRUCTORS \
+#define MossyRocks01_Source_MossyRocks01_Public_MossyRock01_h_15_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API AMossyRock01(const FObjectInitializer& ObjectInitializer); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(AMossyRock01) \
@@ -74,7 +74,7 @@ private: \
 public:
 
 
-#define MossyRocks01_Source_MossyRocks01_Public_MossyRock01_h_12_ENHANCED_CONSTRUCTORS \
+#define MossyRocks01_Source_MossyRocks01_Public_MossyRock01_h_15_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	NO_API AMossyRock01(AMossyRock01&&); \
@@ -85,26 +85,26 @@ DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(AMossyRock01); \
 	DEFINE_DEFAULT_CONSTRUCTOR_CALL(AMossyRock01)
 
 
-#define MossyRocks01_Source_MossyRocks01_Public_MossyRock01_h_12_PRIVATE_PROPERTY_OFFSET
-#define MossyRocks01_Source_MossyRocks01_Public_MossyRock01_h_9_PROLOG
-#define MossyRocks01_Source_MossyRocks01_Public_MossyRock01_h_12_GENERATED_BODY_LEGACY \
+#define MossyRocks01_Source_MossyRocks01_Public_MossyRock01_h_15_PRIVATE_PROPERTY_OFFSET
+#define MossyRocks01_Source_MossyRocks01_Public_MossyRock01_h_12_PROLOG
+#define MossyRocks01_Source_MossyRocks01_Public_MossyRock01_h_15_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	MossyRocks01_Source_MossyRocks01_Public_MossyRock01_h_12_PRIVATE_PROPERTY_OFFSET \
-	MossyRocks01_Source_MossyRocks01_Public_MossyRock01_h_12_RPC_WRAPPERS \
-	MossyRocks01_Source_MossyRocks01_Public_MossyRock01_h_12_INCLASS \
-	MossyRocks01_Source_MossyRocks01_Public_MossyRock01_h_12_STANDARD_CONSTRUCTORS \
+	MossyRocks01_Source_MossyRocks01_Public_MossyRock01_h_15_PRIVATE_PROPERTY_OFFSET \
+	MossyRocks01_Source_MossyRocks01_Public_MossyRock01_h_15_RPC_WRAPPERS \
+	MossyRocks01_Source_MossyRocks01_Public_MossyRock01_h_15_INCLASS \
+	MossyRocks01_Source_MossyRocks01_Public_MossyRock01_h_15_STANDARD_CONSTRUCTORS \
 public: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define MossyRocks01_Source_MossyRocks01_Public_MossyRock01_h_12_GENERATED_BODY \
+#define MossyRocks01_Source_MossyRocks01_Public_MossyRock01_h_15_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	MossyRocks01_Source_MossyRocks01_Public_MossyRock01_h_12_PRIVATE_PROPERTY_OFFSET \
-	MossyRocks01_Source_MossyRocks01_Public_MossyRock01_h_12_RPC_WRAPPERS_NO_PURE_DECLS \
-	MossyRocks01_Source_MossyRocks01_Public_MossyRock01_h_12_INCLASS_NO_PURE_DECLS \
-	MossyRocks01_Source_MossyRocks01_Public_MossyRock01_h_12_ENHANCED_CONSTRUCTORS \
+	MossyRocks01_Source_MossyRocks01_Public_MossyRock01_h_15_PRIVATE_PROPERTY_OFFSET \
+	MossyRocks01_Source_MossyRocks01_Public_MossyRock01_h_15_RPC_WRAPPERS_NO_PURE_DECLS \
+	MossyRocks01_Source_MossyRocks01_Public_MossyRock01_h_15_INCLASS_NO_PURE_DECLS \
+	MossyRocks01_Source_MossyRocks01_Public_MossyRock01_h_15_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
