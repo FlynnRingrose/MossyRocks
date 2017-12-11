@@ -12,7 +12,7 @@ AMossyRock01::AMossyRock01()
     OnClicked.AddDynamic(this, &AMossyRock01::OnSelected);
     
     Rock = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("RockMesh"));
-
+    RootComponent = Rock;
 }
 
 // Called when the game starts or when spawned
@@ -34,7 +34,7 @@ void AMossyRock01::Tick(float DeltaTime)
 void AMossyRock01::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-    //Execute SpinRock() every frame and pass it current axis value (-1 to 1).
+    //Execute SpinRock() every frame and pass it the current axis value (-1 to 1).
     InputComponent->BindAxis("Rotate", this, &AMossyRock01::SpinRock);
 }
 
@@ -71,11 +71,12 @@ void AMossyRock01::GrowClicked()
 
         if (ThisRocksController->GetHitResultAtScreenPosition(MousePosition, ECC_Visibility, bTraceComplex, HitResult) == true)
         {
-            UMossyStaticMesh01* TouchedMoss = Cast<UMossyStaticMesh01>(HitResult.GetComponent());
-            if(TouchedMoss != nullptr && TouchedMoss->bHiddenInGame == true)
+            UMossyPoint01* TouchedMossPoint = Cast<UMossyPoint01>(HitResult.GetComponent());
+            if(TouchedMossPoint != nullptr && TouchedMossPoint->bHiddenInGame == true)
             {
-                UE_LOG(LogTemp, Warning, TEXT("We touched the moss clump."));
-                TouchedMoss->SetHiddenInGame(false);
+                UE_LOG(LogTemp, Warning, TEXT("We touched the moss point."));
+                TouchedMossPoint->SetHiddenInGame(false);
+                TouchedMossPoint->RemoveInstance(HitResult.Item);
             }
             
         }
