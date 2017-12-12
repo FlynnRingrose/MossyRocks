@@ -72,10 +72,10 @@ void AMossyRock01::GrowClicked()
         if (ThisRocksController->GetHitResultAtScreenPosition(MousePosition, ECC_Visibility, bTraceComplex, HitResult) == true)
         {
             UMossyPoint01* TouchedMossPoint = Cast<UMossyPoint01>(HitResult.GetComponent());
-            if(TouchedMossPoint != nullptr && TouchedMossPoint->bHiddenInGame == true)
+            if(TouchedMossPoint != nullptr && TouchedMossPoint->bHiddenInGame == false)
             {
                 UE_LOG(LogTemp, Warning, TEXT("We touched the moss point."));
-                TouchedMossPoint->SetHiddenInGame(false);
+                //TouchedMossPoint->SetHiddenInGame(true);
                 TouchedMossPoint->RemoveInstance(HitResult.Item);
             }
             
