@@ -59,7 +59,7 @@ void AMossyRock01::OnSelected(AActor* ClickedActor, FKey ButtonPressed)
 
 void AMossyRock01::GrowClicked()
 {
-    APlayerController* ThisRocksController = Cast<APlayerController>(GetController());
+    APlayerController* ThisRocksController = Cast<APlayerController>(GetController()); //Creates a pointer to the current controller.
     if (ThisRocksController != nullptr)
     {
         float LocationX;
@@ -69,17 +69,14 @@ void AMossyRock01::GrowClicked()
         FHitResult HitResult;
         const bool bTraceComplex = false;
 
-        if (ThisRocksController->GetHitResultAtScreenPosition(MousePosition, ECC_Visibility, bTraceComplex, HitResult) == true)
-        {
-            UMossyPoint01* TouchedMossPoint = Cast<UMossyPoint01>(HitResult.GetComponent());
-            if(TouchedMossPoint != nullptr && TouchedMossPoint->bHiddenInGame == false)
-            {
-                UE_LOG(LogTemp, Warning, TEXT("We touched the moss point."));
-                //TouchedMossPoint->SetHiddenInGame(true);
-                TouchedMossPoint->RemoveInstance(HitResult.Item);
-            }
-            
-        }
+        ThisRocksController->GetHitResultAtScreenPosition(MousePosition, ECC_Visibility, bTraceComplex, HitResult);
         
+        UMossyPoint01* TouchedMossPoint = Cast<UMossyPoint01>(HitResult.GetComponent());
+        if(TouchedMossPoint != nullptr && HitResult.Item == 0)
+        {
+            UE_LOG(LogTemp, Warning, TEXT("We touched the moss point."));
+            //TouchedMossPoint->SetHiddenInGame(true);
+            TouchedMossPoint->RemoveInstance(0);
+        }
     }
 }
