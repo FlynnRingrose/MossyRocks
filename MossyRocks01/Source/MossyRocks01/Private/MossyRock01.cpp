@@ -74,8 +74,12 @@ void AMossyRock01::GrowClicked()
         UMossyPoint01* TouchedMossPoint = Cast<UMossyPoint01>(HitResult.GetComponent());
         if(TouchedMossPoint != nullptr && HitResult.Item == 0)
         {
-            UE_LOG(LogTemp, Warning, TEXT("We touched the moss point."));
-            //TouchedMossPoint->SetHiddenInGame(true);
+            FTransform OutInstanceTransform = {{0,0,0,0}, {0,0,0}, {0,0,0}};
+            
+            TouchedMossPoint->GetInstanceTransform(HitResult.Item, OutInstanceTransform);
+            
+            UE_LOG(LogTemp, Warning, TEXT("Touched moss location is: %s"), *OutInstanceTransform.GetTranslation().ToString());
+            
             TouchedMossPoint->RemoveInstance(0);
         }
     }
