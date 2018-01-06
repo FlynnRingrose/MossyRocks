@@ -27,7 +27,12 @@ void AMossyRock01::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
     EnableMovement();
-    GrowClicked();
+    
+    TouchedMoss PlayerHoveredMoss = GetPlayerHoverMossyPoint(GetPlayerController());
+    if(PlayerHoveredMoss.TouchedMoss != nullptr && PlayerHoveredMoss.TouchedItem == 0)
+    {
+        GrowMoss(PlayerHoveredMoss.TouchedMoss);
+    }
 }
 
 // Called to bind functionality to input
@@ -57,30 +62,37 @@ void AMossyRock01::OnSelected(AActor* ClickedActor, FKey ButtonPressed)
     UE_LOG(LogTemp, Warning, TEXT("Pawn selected"));
 }
 
-void AMossyRock01::GrowClicked()
+APlayerController* AMossyRock01::GetPlayerController()
 {
     APlayerController* ThisRocksController = Cast<APlayerController>(GetController()); //Creates a pointer to the current controller.
-    if (ThisRocksController != nullptr)
-    {
-        float LocationX;
-        float LocationY;
-        ThisRocksController->GetMousePosition(LocationX, LocationY);
-        FVector2D MousePosition(LocationX, LocationY);
-        FHitResult HitResult;
-        const bool bTraceComplex = false;
+    if (ThisRocksController != nullptr) { return ThisRocksController; }
+    else { UE_LOG(LogTemp, Warning, TEXT("No player controller!")); }
+    return nullptr;
+}
 
-        ThisRocksController->GetHitResultAtScreenPosition(MousePosition, ECC_Visibility, bTraceComplex, HitResult);
+TouchedMoss AMossyRock01::GetPlayerHoverMossyPoint(APlayerController* ThisRocksController)
+{
+    float LocationX;
+    float LocationY;
+    ThisRocksController->GetMousePosition(LocationX, LocationY);
+    FVector2D MousePosition(LocationX, LocationY);
+    FHitResult HitResult;
+    const bool bTraceComplex = false;
+
+    ThisRocksController->GetHitResultAtScreenPosition(MousePosition, ECC_Visibility, bTraceComplex, HitResult);
         
-        UMossyPoint01* TouchedMossPoint = Cast<UMossyPoint01>(HitResult.GetComponent());
-        if(TouchedMossPoint != nullptr && HitResult.Item == 0)
-        {
-            FTransform OutInstanceTransform = {{0,0,0,0}, {0,0,0}, {0,0,0}};
-            
-            TouchedMossPoint->GetInstanceTransform(HitResult.Item, OutInstanceTransform);
-            
-            UE_LOG(LogTemp, Warning, TEXT("Touched moss location is: %s"), *OutInstanceTransform.GetTranslation().ToString());
-            
-            TouchedMossPoint->RemoveInstance(0);
-        }
-    }
+    UMossyPoint01* TouchedMossPoint = Cast<UMossyPoint01>(HitResult.GetComponent());
+    
+    return TouchedMoss {TouchedMossPoint, HitResult.Item};
+}
+
+void AMossyRock01::GrowMoss (UMossyPoint01* TouchedMossPoint)
+{
+    FTransform OutInstanceTransform = {{0,0,0,0}, {0,0,0}, {0,0,0}};
+        
+    TouchedMossPoint->GetInstanceTransform(0, OutInstanceTransform);
+        
+    UE_LOG(LogTemp, Warning, TEXT("Touched moss location is: %s"), *OutInstanceTransform.GetTranslation().ToString());
+        
+    TouchedMossPoint->RemoveInstance(0);
 }

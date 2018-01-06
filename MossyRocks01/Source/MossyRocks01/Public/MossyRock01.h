@@ -11,11 +11,17 @@
 
 class UMossyPoint01;
 
+struct TouchedMoss
+{
+    UMossyPoint01* TouchedMoss;
+    int32 TouchedItem;
+};
+
 UCLASS()
 class MOSSYROCKS01_API AMossyRock01 : public APawn
 {
 	GENERATED_BODY()
-
+    
 public:
 	// Sets default values for this pawn's properties
 	AMossyRock01();
@@ -42,5 +48,10 @@ private:
 
     void SpinRock(float AxisValue);
     void EnableMovement();
-    void GrowClicked();
+    
+    TouchedMoss GetPlayerHoverMossyPoint(APlayerController*);
+    
+    void GrowMoss(UMossyPoint01*);
+    
+    APlayerController* GetPlayerController();
 };
