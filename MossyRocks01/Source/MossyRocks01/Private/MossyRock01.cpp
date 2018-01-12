@@ -9,8 +9,6 @@ AMossyRock01::AMossyRock01()
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
     
-    OnClicked.AddDynamic(this, &AMossyRock01::OnSelected);
-    
     Rock = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("RockMesh"));
     RootComponent = Rock;
 }
@@ -19,7 +17,6 @@ AMossyRock01::AMossyRock01()
 void AMossyRock01::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 // Called every frame
@@ -57,11 +54,6 @@ void AMossyRock01::SpinRock(float AxisValue)
     RockInput.X = AxisValue;
 }
 
-void AMossyRock01::OnSelected(AActor* ClickedActor, FKey ButtonPressed)
-{
-    UE_LOG(LogTemp, Warning, TEXT("Pawn selected"));
-}
-
 APlayerController* AMossyRock01::GetPlayerController()
 {
     APlayerController* ThisRocksController = Cast<APlayerController>(GetController()); //Creates a pointer to the current controller.
@@ -95,4 +87,28 @@ void AMossyRock01::GrowMoss (UMossyPoint01* TouchedMossPoint)
     UE_LOG(LogTemp, Warning, TEXT("Touched moss location is: %s"), *OutInstanceTransform.GetTranslation().ToString());
         
     TouchedMossPoint->RemoveInstance(0);
+    SpawnNewComponent(bMossyStaticMesh, OutInstanceTransform);
 }
+
+UMossyInstancedStaticMesh01* AMossyRock01::SpawnNewComponent(UClass* ComponentClassToSpawn, FTransform& SpawnLocation)
+{
+    check(ComponentClassToSpawn->IsChildOf(UMossyInstancedStaticMesh01::StaticClass()));
+    
+    UMossyInstancedStaticMesh01* SpawnedMoss = NewObject<UMossyInstancedStaticMesh01>(this, ComponentClassToSpawn);
+    
+    SpawnedMoss->SetupAttachment(Rock);
+    SpawnedMoss->SetWorldTransform(SpawnLocation);
+    
+    return SpawnedMoss;
+}
+
+
+
+
+
+
+
+
+
+
+

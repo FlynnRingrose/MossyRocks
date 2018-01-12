@@ -32,11 +32,11 @@ public:
     // Called to bind functionality to input
     virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
     
-    UFUNCTION()
-    void OnSelected(AActor* ClickedActor, FKey ButtonPressed);
-    
     UPROPERTY(EditAnywhere, BlueprintReadOnly)
     UStaticMeshComponent* Rock;
+    
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="MyBPForCPP")
+    TSubclassOf<UMossyStaticMesh01> bMossyStaticMesh;
     
 protected:
 	// Called when the game starts or when spawned
@@ -54,4 +54,6 @@ private:
     void GrowMoss(UMossyPoint01*);
     
     APlayerController* GetPlayerController();
+    
+    UMossyInstancedStaticMesh01* SpawnNewComponent(UClass* ComponentClassToSpawn, FTransform& SpawnLocation);
 };

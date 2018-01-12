@@ -8,39 +8,13 @@
 #include "ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
-class AActor;
-struct FKey;
 #ifdef MOSSYROCKS01_MossyRock01_generated_h
 #error "MossyRock01.generated.h already included, missing '#pragma once' in MossyRock01.h"
 #endif
 #define MOSSYROCKS01_MossyRock01_generated_h
 
-#define MossyRocks01_Source_MossyRocks01_Public_MossyRock01_h_23_RPC_WRAPPERS \
- \
-	DECLARE_FUNCTION(execOnSelected) \
-	{ \
-		P_GET_OBJECT(AActor,Z_Param_ClickedActor); \
-		P_GET_STRUCT(FKey,Z_Param_ButtonPressed); \
-		P_FINISH; \
-		P_NATIVE_BEGIN; \
-		this->OnSelected(Z_Param_ClickedActor,Z_Param_ButtonPressed); \
-		P_NATIVE_END; \
-	}
-
-
-#define MossyRocks01_Source_MossyRocks01_Public_MossyRock01_h_23_RPC_WRAPPERS_NO_PURE_DECLS \
- \
-	DECLARE_FUNCTION(execOnSelected) \
-	{ \
-		P_GET_OBJECT(AActor,Z_Param_ClickedActor); \
-		P_GET_STRUCT(FKey,Z_Param_ButtonPressed); \
-		P_FINISH; \
-		P_NATIVE_BEGIN; \
-		this->OnSelected(Z_Param_ClickedActor,Z_Param_ButtonPressed); \
-		P_NATIVE_END; \
-	}
-
-
+#define MossyRocks01_Source_MossyRocks01_Public_MossyRock01_h_23_RPC_WRAPPERS
+#define MossyRocks01_Source_MossyRocks01_Public_MossyRock01_h_23_RPC_WRAPPERS_NO_PURE_DECLS
 #define MossyRocks01_Source_MossyRocks01_Public_MossyRock01_h_23_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesAMossyRock01(); \
