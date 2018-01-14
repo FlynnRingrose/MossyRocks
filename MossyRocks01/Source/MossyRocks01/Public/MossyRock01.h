@@ -36,7 +36,10 @@ public:
     UStaticMeshComponent* Rock;
     
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="MyBPForCPP")
-    TSubclassOf<UMossyStaticMesh01> bMossyStaticMesh;
+    TSubclassOf<class UMossyStaticMesh01> bpMossyStaticMesh;
+    
+    UFUNCTION(BlueprintCallable, Category = "Spawning")
+    void SpawnNewMoss(FTransform& SpawnLocation);
     
 protected:
 	// Called when the game starts or when spawned
@@ -55,5 +58,5 @@ private:
     
     APlayerController* GetPlayerController();
     
-    UMossyInstancedStaticMesh01* SpawnNewComponent(UClass* ComponentClassToSpawn, FTransform& SpawnLocation);
+    UMossyStaticMesh01* SpawnNewComponent(UClass* ComponentClassToSpawn, FTransform& SpawnLocation);
 };
