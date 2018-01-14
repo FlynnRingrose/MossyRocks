@@ -87,7 +87,7 @@ void AMossyRock01::GrowMoss (UMossyPoint01* TouchedMossPoint)
     UE_LOG(LogTemp, Warning, TEXT("Touched moss location is: %s"), *OutInstanceTransform.GetTranslation().ToString());
         
     TouchedMossPoint->RemoveInstance(0);
-    SpawnNewMoss(OutInstanceTransform);
+    SpawnNewComponent(bpMossyStaticMesh, OutInstanceTransform);
 }
 
 UMossyStaticMesh01* AMossyRock01::SpawnNewComponent(UClass* ComponentClassToSpawn, FTransform& SpawnLocation)
@@ -96,9 +96,9 @@ UMossyStaticMesh01* AMossyRock01::SpawnNewComponent(UClass* ComponentClassToSpaw
     
     UMossyStaticMesh01* SpawnedMoss = NewObject<UMossyStaticMesh01>(GetTransientPackage(), ComponentClassToSpawn);
     
-    SpawnedMoss->RegisterComponentWithWorld(GetWorld());
     SpawnedMoss->AttachToComponent(Rock, FAttachmentTransformRules::KeepRelativeTransform);
     SpawnedMoss->SetWorldTransform(SpawnLocation);
+    SpawnedMoss->RegisterComponentWithWorld(GetWorld());
     
     UE_LOG(LogTemp, Warning, TEXT("Spawning moss."));
     
