@@ -94,10 +94,10 @@ UMossyStaticMesh01* AMossyRock01::SpawnNewComponent(UClass* ComponentClassToSpaw
 {
     check(ComponentClassToSpawn->IsChildOf(UMossyStaticMesh01::StaticClass()));
     
-    UMossyStaticMesh01* SpawnedMoss = NewObject<UMossyStaticMesh01>(GetTransientPackage(), ComponentClassToSpawn);
+    UMossyStaticMesh01* SpawnedMoss = NewObject<UMossyStaticMesh01>(d, ComponentClassToSpawn);
     
     SpawnedMoss->AttachToComponent(Rock, FAttachmentTransformRules::KeepRelativeTransform);
-    SpawnedMoss->SetWorldTransform(SpawnLocation);
+    SpawnedMoss->SetRelativeTransform(SpawnLocation);
     SpawnedMoss->RegisterComponentWithWorld(GetWorld());
     
     UE_LOG(LogTemp, Warning, TEXT("Spawning moss."));
