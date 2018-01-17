@@ -80,7 +80,7 @@ TouchedMoss AMossyRock01::GetPlayerHoverMossyPoint(APlayerController* ThisRocksC
 
 void AMossyRock01::GrowMoss (UMossyPoint01* TouchedMossPoint)
 {
-    FTransform OutInstanceTransform = {{0,0,0,0}, {0,0,0}, {0,0,0}};
+    FTransform OutInstanceTransform;
         
     TouchedMossPoint->GetInstanceTransform(0, OutInstanceTransform);
         
