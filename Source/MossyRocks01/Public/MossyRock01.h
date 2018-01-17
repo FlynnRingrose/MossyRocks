@@ -13,7 +13,7 @@ class UMossyPoint01;
 
 struct TouchedMoss
 {
-    UMossyPoint01* TouchedMoss;
+    UMossyPoint01* Moss;
     int32 TouchedItem;
 };
 

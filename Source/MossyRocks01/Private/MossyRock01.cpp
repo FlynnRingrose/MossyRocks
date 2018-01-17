@@ -26,9 +26,9 @@ void AMossyRock01::Tick(float DeltaTime)
     EnableMovement();
     
     TouchedMoss PlayerHoveredMoss = GetPlayerHoverMossyPoint(GetPlayerController());
-    if(PlayerHoveredMoss.TouchedMoss != nullptr && PlayerHoveredMoss.TouchedItem == 0)
+    if(PlayerHoveredMoss.Moss != nullptr && PlayerHoveredMoss.TouchedItem == 0)
     {
-        GrowMoss(PlayerHoveredMoss.TouchedMoss);
+        GrowMoss(PlayerHoveredMoss.Moss);
     }
 }
 
