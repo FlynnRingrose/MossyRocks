@@ -30,6 +30,8 @@ void AMossyRock01::Tick(float DeltaTime)
     {
         GrowMoss(PlayerHoveredMoss.Moss);
     }
+    //If the parent's moss count is equal to the child's maximum moss count.
+    //Reset count and fire win UFunction: Stop timer, cheer up rock, load next level.
 }
 
 // Called to bind functionality to input
@@ -94,20 +96,17 @@ UMossyStaticMesh01* AMossyRock01::SpawnNewComponent(UClass* ComponentClassToSpaw
 {
     check(ComponentClassToSpawn->IsChildOf(UMossyStaticMesh01::StaticClass()));
     
-    UMossyStaticMesh01* SpawnedMoss = NewObject<UMossyStaticMesh01>(d, ComponentClassToSpawn);
+    UMossyStaticMesh01* SpawnedMoss = NewObject<UMossyStaticMesh01>(this, ComponentClassToSpawn);
     
     SpawnedMoss->AttachToComponent(Rock, FAttachmentTransformRules::KeepRelativeTransform);
     SpawnedMoss->SetRelativeTransform(SpawnLocation);
     SpawnedMoss->RegisterComponentWithWorld(GetWorld());
     
-    UE_LOG(LogTemp, Warning, TEXT("Spawning moss."));
+    AMossyGameMode* CurrentMossyGameMode = Cast<AMossyGameMode>(GetWorld()->GetAuthGameMode());
+    
+    CurrentMossyGameMode->SetMossCountCurrent();
     
     return SpawnedMoss;
-}
-
-void AMossyRock01::SpawnNewMoss(FTransform& SpawnLocation)
-{
-    
 }
 
 

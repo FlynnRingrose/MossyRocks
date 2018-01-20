@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 #include "MossyStaticMesh01.h"
-#include "MossyInstancedStaticMesh01.h"
+#include "MossyGameMode.h"
 #include "MossyPoint01.h"
 #include "MossyRock01.generated.h"
 
@@ -38,8 +38,8 @@ public:
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="MyBPForCPP")
     TSubclassOf<class UMossyStaticMesh01> bpMossyStaticMesh;
     
-    UFUNCTION(BlueprintCallable, Category = "Spawning")
-    void SpawnNewMoss(FTransform& SpawnLocation);
+    UPROPERTY(EditAnywhere, BlueprintReadOnly)
+    int MaximumMossCount = 0;
     
 protected:
 	// Called when the game starts or when spawned

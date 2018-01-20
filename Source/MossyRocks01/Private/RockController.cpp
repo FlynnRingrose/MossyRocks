@@ -8,3 +8,13 @@ ARockController::ARockController()
     bEnableClickEvents = true;
     bEnableMouseOverEvents = true;
 }
+
+void ARockController::BeginPlay()
+{
+    
+}
+
+void ARockController::Tick(float DeltaTime)
+{
+    
+}
