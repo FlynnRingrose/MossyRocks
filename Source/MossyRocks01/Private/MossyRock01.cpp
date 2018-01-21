@@ -102,9 +102,7 @@ UMossyStaticMesh01* AMossyRock01::SpawnNewComponent(UClass* ComponentClassToSpaw
     SpawnedMoss->SetRelativeTransform(SpawnLocation);
     SpawnedMoss->RegisterComponentWithWorld(GetWorld());
     
-    AMossyGameMode* CurrentMossyGameMode = Cast<AMossyGameMode>(GetWorld()->GetAuthGameMode());
-    
-    CurrentMossyGameMode->SetMossCountCurrent();
+    CurrentMossCount++;
     
     return SpawnedMoss;
 }

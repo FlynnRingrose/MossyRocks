@@ -20,9 +20,6 @@ public:
     
     void SetMossCountCurrent() { MossCountCurrent++; };
     
-    //UPROPERTY(EditAnywhere, BlueprintReadWrite)
-    //bool bTimerEnabled = false;
-    
 private:
     int32 MossCountCurrent = 0;
 };

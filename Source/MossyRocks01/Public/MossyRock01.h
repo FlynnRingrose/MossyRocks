@@ -32,14 +32,19 @@ public:
     // Called to bind functionality to input
     virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
     
+    UFUNCTION(BlueprintCallable, Category = "Setup")
+    int32 GetCurrentMossCount() { return CurrentMossCount; };
+    
     UPROPERTY(EditAnywhere, BlueprintReadOnly)
     UStaticMeshComponent* Rock;
     
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="MyBPForCPP")
     TSubclassOf<class UMossyStaticMesh01> bpMossyStaticMesh;
     
-    UPROPERTY(EditAnywhere, BlueprintReadOnly)
-    int MaximumMossCount = 0;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    int32 MaximumMossCount = 0;
+    
+    int32 CurrentMossCount = 0;
     
 protected:
 	// Called when the game starts or when spawned
