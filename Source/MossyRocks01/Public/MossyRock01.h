@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 #include "MossyStaticMesh01.h"
-#include "MossyGameMode.h"
+//#include "MossyGameMode.h"
 #include "MossyPoint01.h"
 #include "MossyRock01.generated.h"
 
@@ -34,6 +34,9 @@ public:
     
     UFUNCTION(BlueprintCallable, Category = "Setup")
     int32 GetCurrentMossCount() { return CurrentMossCount; };
+    
+    UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
+    void VictorySequence();
     
     UPROPERTY(EditAnywhere, BlueprintReadOnly)
     UStaticMeshComponent* Rock;
