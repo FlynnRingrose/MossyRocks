@@ -25,13 +25,15 @@ void AMossyRock01::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
     EnableMovement();
     
-    TouchedMoss PlayerHoveredMoss = GetPlayerHoverMossyPoint(GetPlayerController());
+    if(GetPlayerController() != nullptr)
+    {
+        PlayerHoveredMoss = GetPlayerHoverMossyPoint(GetPlayerController());
+    }
+    
     if(PlayerHoveredMoss.Moss != nullptr && PlayerHoveredMoss.TouchedItem == 0)
     {
         GrowMoss(PlayerHoveredMoss.Moss);
     }
-    //If the parent's moss count is equal to the child's maximum moss count.
-    //Reset count and fire win UFunction: Stop timer, cheer up rock, load next level.
 }
 
 // Called to bind functionality to input

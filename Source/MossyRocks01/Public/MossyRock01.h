@@ -53,6 +53,8 @@ protected:
 private:
     FVector MovementInput;
     FVector RockInput;
+    
+    TouchedMoss PlayerHoveredMoss {nullptr, 0};
 
     void SpinRock(float AxisValue);
     void EnableMovement();
