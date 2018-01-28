@@ -47,6 +47,11 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
     int32 MaximumMossCount = 0;
     
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    int32 TimerDefault = 10;
+    
+    int32 GetTimerDefault() { return TimerDefault; };
+    
     int32 CurrentMossCount = 0;
     
 protected:

@@ -13,15 +13,20 @@ void AMossyGameMode::Tick(float DeltaTime)
     
     AMossyRock01* ControlledRock = Cast<AMossyRock01>(GetWorld()->GetFirstPlayerController()->GetPawn());
     
-    if(ControlledRock == nullptr)
+    if(ControlledRock == nullptr) { return; }
+    
+    else if((ControlledRock->GetCurrentMossCount()) >= (ControlledRock->MaximumMossCount)/* && bTimerEnabled == true*/)
     {
-        return;
-    }
-    else if((ControlledRock->GetCurrentMossCount()) >= (ControlledRock->MaximumMossCount) && bTimerEnabled == true)
-    {
-        UE_LOG(LogTemp, Warning, TEXT("Game mode is tick iffing."));
-        bTimerEnabled = false;
+        //bTimerEnabled = false;
         ControlledRock->VictorySequence();
+        NextRockIndex++;
+        
+        AMossyRock01* NewRock = GetWorld()->SpawnActor<AMossyRock01>(RockArray[NextRockIndex], StartLocation, StartRotation);
+        
+        ARockController* RockController = Cast<ARockController>(GetWorld()->GetFirstPlayerController());
+        RockController->UnPossess();
+        RockController->Possess(NewRock);
+        
+        RemainingTime = NewRock->GetTimerDefault();
     }
 }
-

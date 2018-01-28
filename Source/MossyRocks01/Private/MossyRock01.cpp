@@ -25,8 +25,6 @@ void AMossyRock01::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
     EnableMovement();
     
-    UE_LOG(LogTemp, Warning, TEXT("Rock ticking."));
-    
     if(GetPlayerController() != nullptr)
     {
         PlayerHoveredMoss = GetPlayerHoverMossyPoint(GetPlayerController());
