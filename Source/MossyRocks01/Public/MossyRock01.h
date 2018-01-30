@@ -5,11 +5,8 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 #include "MossyStaticMesh01.h"
-//#include "MossyGameMode.h"
 #include "MossyPoint01.h"
 #include "MossyRock01.generated.h"
-
-class UMossyPoint01;
 
 struct TouchedMoss
 {
@@ -38,6 +35,8 @@ public:
     UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
     void VictorySequence();
     
+    int32 GetTimerDefault() { return TimerDefault; };
+    
     UPROPERTY(EditAnywhere, BlueprintReadOnly)
     UStaticMeshComponent* Rock;
     
@@ -49,8 +48,6 @@ public:
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
     int32 TimerDefault = 10;
-    
-    int32 GetTimerDefault() { return TimerDefault; };
     
     int32 CurrentMossCount = 0;
     

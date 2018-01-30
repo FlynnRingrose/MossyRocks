@@ -26,22 +26,30 @@ public:
     UFUNCTION(BlueprintCallable, Category = "Setup")
     int32 GetMossCountCurrent() { return MossCountCurrent; };
     
+    void SetMossCountCurrent() { MossCountCurrent++; };
+    
+    AMossyRock01* SpawnRock();
+    
+    void PossessRock(AMossyRock01* RockToPossess);
+    
+    void CompleteRock(AMossyRock01* RockToComplete);
+    
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
     bool bTimerEnabled = true;
     
     UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category="Rock Array")
     TArray<TSubclassOf<AMossyRock01>> RockArray; //No asterisks.
     
-    int32 NextRockIndex = 0;
-    
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
     int32 RemainingTime = 31;
     
-    void SetMossCountCurrent() { MossCountCurrent++; };
+    int32 NextRockIndex = 0;
+    
+    
     
 private:
     int32 MossCountCurrent = 0;
 
-    FVector StartLocation {300,-60,80};
-    FRotator StartRotation {0,0,0};
+    const FVector StartLocation {300,-60,80};
+    const FRotator StartRotation {0,0,0};
 };

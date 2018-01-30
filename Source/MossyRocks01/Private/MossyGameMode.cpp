@@ -15,18 +15,30 @@ void AMossyGameMode::Tick(float DeltaTime)
     
     if(ControlledRock == nullptr) { return; }
     
-    else if((ControlledRock->GetCurrentMossCount()) >= (ControlledRock->MaximumMossCount)/* && bTimerEnabled == true*/)
+    if ((ControlledRock->GetCurrentMossCount()) >= (ControlledRock->MaximumMossCount))
     {
-        //bTimerEnabled = false;
-        ControlledRock->VictorySequence();
-        NextRockIndex++;
-        
-        AMossyRock01* NewRock = GetWorld()->SpawnActor<AMossyRock01>(RockArray[NextRockIndex], StartLocation, StartRotation);
-        
-        ARockController* RockController = Cast<ARockController>(GetWorld()->GetFirstPlayerController());
-        RockController->UnPossess();
-        RockController->Possess(NewRock);
-        
-        RemainingTime = NewRock->GetTimerDefault();
+        CompleteRock(ControlledRock);
     }
+}
+
+AMossyRock01* AMossyGameMode::SpawnRock()
+{
+    AMossyRock01* NextRock = GetWorld()->SpawnActor<AMossyRock01>(RockArray[NextRockIndex], StartLocation, StartRotation);
+    return NextRock;
+}
+
+void AMossyGameMode::PossessRock(AMossyRock01* RockToPossess)
+{
+    ARockController* RockController = Cast<ARockController>(GetWorld()->GetFirstPlayerController());
+    RockController->UnPossess();
+    RockController->Possess(RockToPossess);
+}
+
+void AMossyGameMode::CompleteRock(AMossyRock01* RockToComplete)
+{
+    RockToComplete->VictorySequence();
+    NextRockIndex++;
+    AMossyRock01* NewRock = SpawnRock();
+    PossessRock(NewRock);
+    RemainingTime = NewRock->GetTimerDefault();
 }
