@@ -11,7 +11,7 @@ void AMossyGameMode::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
     
-    AMossyRock01* ControlledRock = Cast<AMossyRock01>(GetWorld()->GetFirstPlayerController()->GetPawn());
+    AMossyRock* ControlledRock = Cast<AMossyRock>(GetWorld()->GetFirstPlayerController()->GetPawn());
     
     if(ControlledRock == nullptr) { return; }
     
@@ -21,24 +21,24 @@ void AMossyGameMode::Tick(float DeltaTime)
     }
 }
 
-AMossyRock01* AMossyGameMode::SpawnRock()
+AMossyRock* AMossyGameMode::SpawnRock()
 {
-    AMossyRock01* NextRock = GetWorld()->SpawnActor<AMossyRock01>(RockArray[NextRockIndex], StartLocation, StartRotation);
+    AMossyRock* NextRock = GetWorld()->SpawnActor<AMossyRock>(RockArray[NextRockIndex], StartLocation, StartRotation);
     return NextRock;
 }
 
-void AMossyGameMode::PossessRock(AMossyRock01* RockToPossess)
+void AMossyGameMode::PossessRock(AMossyRock* RockToPossess)
 {
     ARockController* RockController = Cast<ARockController>(GetWorld()->GetFirstPlayerController());
     RockController->UnPossess();
     RockController->Possess(RockToPossess);
 }
 
-void AMossyGameMode::CompleteRock(AMossyRock01* RockToComplete)
+void AMossyGameMode::CompleteRock(AMossyRock* RockToComplete)
 {
     RockToComplete->VictorySequence();
     NextRockIndex++;
-    AMossyRock01* NewRock = SpawnRock();
+    AMossyRock* NewRock = SpawnRock();
     PossessRock(NewRock);
     RemainingTime = NewRock->GetTimerDefault();
 }

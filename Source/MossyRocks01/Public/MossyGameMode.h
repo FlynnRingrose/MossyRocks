@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "MossyRock01.h"
+#include "MossyRock.h"
 #include "RockController.h"
 #include "GameFramework/Pawn.h"
 
@@ -28,17 +28,17 @@ public:
     
     void SetMossCountCurrent() { MossCountCurrent++; };
     
-    AMossyRock01* SpawnRock();
+    AMossyRock* SpawnRock();
     
-    void PossessRock(AMossyRock01* RockToPossess);
+    void PossessRock(AMossyRock* RockToPossess);
     
-    void CompleteRock(AMossyRock01* RockToComplete);
+    void CompleteRock(AMossyRock* RockToComplete);
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
     bool bTimerEnabled = true;
     
     UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category="Rock Array")
-    TArray<TSubclassOf<AMossyRock01>> RockArray; //No asterisks.
+    TArray<TSubclassOf<AMossyRock>> RockArray; //No asterisks.
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
     int32 RemainingTime = 31;
