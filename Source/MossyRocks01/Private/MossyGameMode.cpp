@@ -15,19 +15,19 @@ void AMossyGameMode::Tick(float DeltaTime)
     
     if(ControlledRock == nullptr) { return; }
     
-    if ((ControlledRock->GetCurrentMossCount()) >= (ControlledRock->MaximumMossCount))
+    if ((ControlledRock->GetCurrentMossCount()) >= (ControlledRock->GetMaximumMossCount()))
     {
         CompleteRock(ControlledRock);
     }
 }
 
-AMossyRock* AMossyGameMode::SpawnRock()
+AMossyRock* AMossyGameMode::SpawnRock() const
 {
     AMossyRock* NextRock = GetWorld()->SpawnActor<AMossyRock>(RockArray[NextRockIndex], StartLocation, StartRotation);
     return NextRock;
 }
 
-void AMossyGameMode::PossessRock(AMossyRock* RockToPossess)
+void AMossyGameMode::PossessRock(AMossyRock* RockToPossess) const
 {
     ARockController* RockController = Cast<ARockController>(GetWorld()->GetFirstPlayerController());
     RockController->UnPossess();

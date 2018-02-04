@@ -19,55 +19,52 @@ class MOSSYROCKS01_API AMossyRock : public APawn
     GENERATED_BODY()
     
 public:
-    // Sets default values for this pawn's properties
     AMossyRock();
     
-    // Called every frame
     virtual void Tick(float DeltaTime) override;
     
-    // Called to bind functionality to input
     virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-    
-    UFUNCTION(BlueprintCallable, Category = "Setup")
-    int32 GetCurrentMossCount() { return CurrentMossCount; };
     
     UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
     void VictorySequence();
     
-    int32 GetTimerDefault() { return TimerDefault; };
+    int32 GetCurrentMossCount() const { return CurrentMossCount; };
     
-    UPROPERTY(EditAnywhere, BlueprintReadOnly)
-    UStaticMeshComponent* Rock;
+    int32 GetMaximumMossCount() const { return MaximumMossCount; };
     
-    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="MyBPForCPP")
-    TSubclassOf<class UMossyClump> bpMossyClump;
-    
-    UPROPERTY(EditAnywhere, BlueprintReadWrite)
-    int32 MaximumMossCount = 0;
-    
-    UPROPERTY(EditAnywhere, BlueprintReadWrite)
-    int32 TimerDefault = 10;
-    
-    int32 CurrentMossCount = 0;
+    int32 GetTimerDefault() const { return TimerDefault; };
     
 protected:
-    // Called when the game starts or when spawned
     virtual void BeginPlay() override;
     
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Setup")
+    UStaticMeshComponent* Rock;
+    
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Setup")
+    TSubclassOf<class UMossyClump> bpMossyClump;
+    
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Setup")
+    int32 MaximumMossCount = 2;
+    
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Setup")
+    int32 TimerDefault = 10;
+    
 private:
+    void UpdateRockRotation(float AxisValue);
+    void SetRockRotation();
+    
+    TouchedMoss GetPlayerHoverMossyPoint(APlayerController*) const;
+    
+    APlayerController* GetPlayerController() const;
+    
+    void GrowMoss(UMossyPoint*);
+    
+    UMossyClump* SpawnNewComponent(UClass* ComponentClassToSpawn, FTransform& SpawnLocation);
+    
     FVector MovementInput;
     FVector RockInput;
     
     TouchedMoss PlayerHoveredMoss {nullptr, 0};
     
-    void SpinRock(float AxisValue);
-    void EnableMovement();
-    
-    TouchedMoss GetPlayerHoverMossyPoint(APlayerController*);
-    
-    void GrowMoss(UMossyPoint*);
-    
-    APlayerController* GetPlayerController();
-    
-    UMossyClump* SpawnNewComponent(UClass* ComponentClassToSpawn, FTransform& SpawnLocation);
+    int32 CurrentMossCount = 0;
 };

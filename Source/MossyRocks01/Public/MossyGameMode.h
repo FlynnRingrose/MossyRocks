@@ -10,45 +10,34 @@
 #include "GameFramework/GameModeBase.h"
 #include "MossyGameMode.generated.h"
 
-/**
- * 
- */
-
 UCLASS()
 class MOSSYROCKS01_API AMossyGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
 	
 public:
-    virtual void BeginPlay() override;
     virtual void Tick(float DeltaTime) override;
     
-    UFUNCTION(BlueprintCallable, Category = "Setup")
-    int32 GetMossCountCurrent() { return MossCountCurrent; };
+protected:
+    virtual void BeginPlay() override;
     
-    void SetMossCountCurrent() { MossCountCurrent++; };
+    UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category= "Setup")
+    TArray<TSubclassOf<AMossyRock>> RockArray; //No asterisks.
     
-    AMossyRock* SpawnRock();
+    UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite)
+    int32 RemainingTime = 31;
     
-    void PossessRock(AMossyRock* RockToPossess);
+    UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly)
+    bool bTimerEnabled = true;
+    
+private:
+    AMossyRock* SpawnRock() const;
+    
+    void PossessRock(AMossyRock* RockToPossess) const;
     
     void CompleteRock(AMossyRock* RockToComplete);
     
-    UPROPERTY(EditAnywhere, BlueprintReadWrite)
-    bool bTimerEnabled = true;
-    
-    UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category="Rock Array")
-    TArray<TSubclassOf<AMossyRock>> RockArray; //No asterisks.
-    
-    UPROPERTY(EditAnywhere, BlueprintReadWrite)
-    int32 RemainingTime = 31;
-    
     int32 NextRockIndex = 0;
-    
-    
-    
-private:
-    int32 MossCountCurrent = 0;
 
     const FVector StartLocation {300,-60,80};
     const FRotator StartRotation {0,0,0};

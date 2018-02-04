@@ -6,9 +6,6 @@
 #include "GameFramework/PlayerController.h"
 #include "RockController.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class MOSSYROCKS01_API ARockController : public APlayerController
 {
@@ -16,8 +13,4 @@ class MOSSYROCKS01_API ARockController : public APlayerController
 
 public:
     ARockController();
-    
-private:
-    virtual void BeginPlay() override;
-    virtual void Tick( float DeltaTime ) override;
 };

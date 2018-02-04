@@ -2,28 +2,23 @@
 
 #include "MossyRock.h"
 
-
-// Sets default values
 AMossyRock::AMossyRock()
 {
-    // Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
     PrimaryActorTick.bCanEverTick = true;
     
     Rock = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("RockMesh"));
     RootComponent = Rock;
 }
 
-// Called when the game starts or when spawned
 void AMossyRock::BeginPlay()
 {
     Super::BeginPlay();
 }
 
-// Called every frame
 void AMossyRock::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
-    EnableMovement();
+    SetRockRotation();
     
     if(GetPlayerController() != nullptr)
     {
@@ -36,16 +31,15 @@ void AMossyRock::Tick(float DeltaTime)
     }
 }
 
-// Called to bind functionality to input
 void AMossyRock::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
     Super::SetupPlayerInputComponent(PlayerInputComponent);
     //Execute SpinRock() every frame and pass it the current axis value (-1 to 1).
-    InputComponent->BindAxis("Rotate", this, &AMossyRock::SpinRock);
+    InputComponent->BindAxis("Rotate", this, &AMossyRock::UpdateRockRotation);
 }
 
 //Set actor's rotation every frame to its current rotation plus current value of RockInput.X.
-void AMossyRock::EnableMovement()
+void AMossyRock::SetRockRotation()
 {
     FRotator NewRotation = GetActorRotation();
     NewRotation.Yaw += RockInput.X;
@@ -53,12 +47,12 @@ void AMossyRock::EnableMovement()
 }
 
 //Executed every frame. AxisValue is -1 to 1.
-void AMossyRock::SpinRock(float AxisValue)
+void AMossyRock::UpdateRockRotation(float AxisValue)
 {
     RockInput.X = AxisValue;
 }
 
-APlayerController* AMossyRock::GetPlayerController()
+APlayerController* AMossyRock::GetPlayerController() const
 {
     APlayerController* ThisRocksController = Cast<APlayerController>(GetController()); //Creates a pointer to the current controller.
     if (ThisRocksController != nullptr) { return ThisRocksController; }
@@ -66,7 +60,7 @@ APlayerController* AMossyRock::GetPlayerController()
     return nullptr;
 }
 
-TouchedMoss AMossyRock::GetPlayerHoverMossyPoint(APlayerController* ThisRocksController)
+TouchedMoss AMossyRock::GetPlayerHoverMossyPoint(APlayerController* ThisRocksController) const
 {
     float LocationX;
     float LocationY;

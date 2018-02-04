@@ -9,13 +9,3 @@ ARockController::ARockController()
     bEnableMouseOverEvents = true;
     bAutoManageActiveCameraTarget = false;
 }
-
-void ARockController::BeginPlay()
-{
-
-}
-
-void ARockController::Tick(float DeltaTime)
-{
-    
-}
