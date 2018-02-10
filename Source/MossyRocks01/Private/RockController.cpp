@@ -7,5 +7,5 @@ ARockController::ARockController()
     bShowMouseCursor = true;
     bEnableClickEvents = true;
     bEnableMouseOverEvents = true;
-    bAutoManageActiveCameraTarget = false;
+    bAutoManageActiveCameraTarget = false; //Do not allow controller to change camera upon possession.
 }

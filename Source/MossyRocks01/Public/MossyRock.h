@@ -7,7 +7,7 @@
 #include "MossyPoint.h"
 #include "MossyRock.generated.h"
 
-struct TouchedMoss
+struct TouchedMoss //For returning moss component and instance.
 {
     UMossyPoint* Moss;
     int32 TouchedItem;
@@ -25,6 +25,7 @@ public:
     
     virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
     
+    //An event for animating a completed rock.
     UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
     void VictorySequence();
     
@@ -37,9 +38,11 @@ public:
 protected:
     virtual void BeginPlay() override;
     
+    //The bare rock actor to be assigned in editor.
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Setup")
     UStaticMeshComponent* Rock;
     
+    //Moss clump actors to be assigned in editor.
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Setup")
     TSubclassOf<class UMossyClump> bpMossyClump;
     
@@ -50,21 +53,21 @@ protected:
     int32 TimerDefault = 10;
     
 private:
-    void UpdateRockRotation(float AxisValue);
-    void SetRockRotation();
+    void UpdateRockRotation(float AxisValue); //Adds axis input to RockInput value.
+    void SetRockRotation(); //Adds axis input to actor's rotation.
     
-    TouchedMoss GetPlayerHoverMossyPoint(APlayerController*) const;
+    TouchedMoss GetMossyPointUnderCursor(APlayerController*) const; //Checks if cursor is over mossy point.
     
     APlayerController* GetPlayerController() const;
     
-    void GrowMoss(UMossyPoint*);
+    void GrowMoss(UMossyPoint*); //Remove mossy point instance and spawn mossy clump component.
     
-    UMossyClump* SpawnNewComponent(UClass* ComponentClassToSpawn, FTransform& SpawnLocation);
+    UMossyClump* SpawnNewComponent(UClass* ComponentClassToSpawn, FTransform& SpawnLocation); //Adds mossy clump component.
     
     FVector MovementInput;
     FVector RockInput;
     
-    TouchedMoss PlayerHoveredMoss {nullptr, 0};
+    TouchedMoss PlayerHoveredMoss {nullptr, 0}; //Instance of struct declared above.
     
     int32 CurrentMossCount = 0;
 };

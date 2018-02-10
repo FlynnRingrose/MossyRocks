@@ -23,14 +23,14 @@ void AMossyGameMode::Tick(float DeltaTime)
 
 AMossyRock* AMossyGameMode::SpawnRock() const
 {
-    AMossyRock* NextRock = GetWorld()->SpawnActor<AMossyRock>(RockArray[NextRockIndex], StartLocation, StartRotation);
+    AMossyRock* NextRock = GetWorld()->SpawnActor<AMossyRock>(RockArray[NextRockIndex], StartLocation, StartRotation); //Create new rock from array defined in blueprint.
     return NextRock;
 }
 
 void AMossyGameMode::PossessRock(AMossyRock* RockToPossess) const
 {
     ARockController* RockController = Cast<ARockController>(GetWorld()->GetFirstPlayerController());
-    RockController->UnPossess();
+    RockController->UnPossess(); //Unposses whatever the controller is possessing.
     RockController->Possess(RockToPossess);
 }
 
@@ -40,5 +40,5 @@ void AMossyGameMode::CompleteRock(AMossyRock* RockToComplete)
     NextRockIndex++;
     AMossyRock* NewRock = SpawnRock();
     PossessRock(NewRock);
-    RemainingTime = NewRock->GetTimerDefault();
+    RemainingTime = NewRock->GetTimerDefault(); //Set timer to value defined in rock blueprint.
 }

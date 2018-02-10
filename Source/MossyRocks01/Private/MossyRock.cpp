@@ -22,7 +22,7 @@ void AMossyRock::Tick(float DeltaTime)
     
     if(GetPlayerController() != nullptr)
     {
-        PlayerHoveredMoss = GetPlayerHoverMossyPoint(GetPlayerController());
+        PlayerHoveredMoss = GetMossyPointUnderCursor(GetPlayerController());
     }
     
     if(PlayerHoveredMoss.Moss != nullptr && PlayerHoveredMoss.TouchedItem == 0)
@@ -46,7 +46,7 @@ void AMossyRock::SetRockRotation()
     SetActorRotation(NewRotation);
 }
 
-//Executed every frame. AxisValue is -1 to 1.
+//Executed every frame by SetupPlayerInputComponent(). AxisValue is -1 to 1.
 void AMossyRock::UpdateRockRotation(float AxisValue)
 {
     RockInput.X = AxisValue;
@@ -60,7 +60,7 @@ APlayerController* AMossyRock::GetPlayerController() const
     return nullptr;
 }
 
-TouchedMoss AMossyRock::GetPlayerHoverMossyPoint(APlayerController* ThisRocksController) const
+TouchedMoss AMossyRock::GetMossyPointUnderCursor(APlayerController* ThisRocksController) const
 {
     float LocationX;
     float LocationY;

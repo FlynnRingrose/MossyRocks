@@ -21,6 +21,7 @@ public:
 protected:
     virtual void BeginPlay() override;
     
+    //Levels/Rocks to be assigned in editor.
     UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category= "Setup")
     TArray<TSubclassOf<AMossyRock>> RockArray; //No asterisks.
     
@@ -31,9 +32,9 @@ protected:
     bool bTimerEnabled = true;
     
 private:
-    AMossyRock* SpawnRock() const;
+    AMossyRock* SpawnRock() const; //Creates and assigns next rock.
     
-    void PossessRock(AMossyRock* RockToPossess) const;
+    void PossessRock(AMossyRock* RockToPossess) const; //Possess rock as pawn.
     
     void CompleteRock(AMossyRock* RockToComplete);
     
